@@ -1,11 +1,99 @@
+#coding:utf-8
+"""
+中文必须添加#coding:utf-8
+否则会出现乱码或服务器无法启动等奇怪现象
+"""
+
+from django.shortcuts import render, redirect
+from django.template import loader
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.views import generic
-from django.shortcuts import render
+from django.views.generic import View
+from .forms import RegisterForm, LoginForm
+from django import forms
 
 
+#def login(request):
+#    return render(request, 'outis_user/login.html')
 
-class IndexView(generic.ListView):
-    template_name = 'outis_user/index.html'
+#def register(request):
+#    return render(request, 'outis_user/register.html')
 
-    def get_queryset(self):
-        return None
+class RegisterView(View):
+    form_class = RegisterForm
+    template_name = 'outis_user/register.html'
+
+    # display a blank form
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form':form})
+
+    # process form data
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+
+            # cleaned (normalized) data
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.save()
+
+            # returns User object if credentials are correct
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('user:profile')
+
+
+        return render(request, self.template_name, {'form':form})
+
+
+class LoginView(View):
+    form_class = LoginForm
+    template_name = 'outis_user/login.html'
+
+    # display a blank form
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form':form})
+
+    # process form data
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        # cleaned (normalized) data
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # returns User object if credentials are correct
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('user:profile')
+
+        outis_errors = "Sorry, username or password doesn't match"
+        return render(request, self.template_name,{'form':form,
+        'outis_errors':outis_errors})
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('user:profile')
+
+class ProfileView(View):
+    def get(self, request):
+        return render(request, 'outis_user/profile.html')
+
+
 

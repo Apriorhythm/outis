@@ -1,0 +1,21 @@
+{% extends 'outis_base/base.html' %}
+
+{% block outis_title %}
+User Profile
+{% endblock %}
+
+{% block outis_staticfiles %}
+{% endblock %}
+
+
+{% block outis_body %}
+	<h1>Profile Here</h1>
+	{% if user.is_authenticated %}
+		<h2>{{ user.username }}</h2>
+	{% else %}
+		<p>Haven login</p>
+	 {% endif %}
+
+
+{% endblock %}
+

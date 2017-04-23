@@ -1,0 +1,30 @@
+{% extends 'outis_base/base.html' %}
+{% block outis_title %}Login{% endblock %}
+
+
+{% block outis_staticfiles %}
+    {% load staticfiles %}
+	<script type="text/javascript" src="{% static '/js/login.js' %}"></script>
+	<link type="text/css" rel="stylesheet" href="{% static '/css/login.css' %}">
+{% endblock %}
+
+
+{% block outis_body %}
+	<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="login-page">
+		  <div class="form">
+			{% include 'outis_base/form-template.html' %}
+			<button type="submit">Login</button>
+			<p class="message" type="submit">No account? 1 minute <a href="{% url 'user:register' %}">Register</a></p>
+
+			</div>
+		</div>
+
+
+	</form>
+{% endblock %}
+
+
+
+
