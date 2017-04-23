@@ -1,0 +1,16 @@
+
+{% load staticfiles %}
+<link type="text/css" rel="stylesheet" href="{% static '/css/form-template.css' %}">
+
+
+{% if sfm_errors %}
+	<p style="color:red;"><strong>{{ sfm_errors }}</strong></p>
+{% endif %}
+
+{% for field in form %}
+	<div class="form-group">
+		<label class="form-template-field-label">{{ field.label_tag }}</label>
+		<div class="form-template-field">{{ field }}</div>
+	</div>
+{% endfor %}
+

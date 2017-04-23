@@ -22,6 +22,8 @@ from django.conf.urls import include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
+    url(r'', include('outis_base.urls')),
     url(r'^user/', include('outis_user.urls')),
     url(r'^post/', include('outis_post.urls')),
 ]
+
