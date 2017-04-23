@@ -14,8 +14,8 @@ from django.contrib.auth.models import AbstractUser
 class OutisUser(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     heat = models.SmallIntegerField('heat', default=1)
-    logo = models.ImageField()
-
+    logo = models.ImageField(upload_to='user/logo/', default='user/logo/default-logo.jpg')
+    signature = models.CharField(max_length=128, default='吃惊')
 
     def __str__(self):
         return self.username

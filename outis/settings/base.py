@@ -123,7 +123,14 @@ STATIC_URL = '/static/'
 
 
 # #################### Outis #################### #
+
+# Change default user model
 AUTH_USER_MODEL = "outis_user.OutisUser"
+
+# Upload Files
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname('__file__')))
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
+MEDIA_URL = '/uploads/'
 
 # #################### Outis #################### #
 

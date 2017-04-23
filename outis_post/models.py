@@ -30,7 +30,7 @@ class OutisPost(models.Model):
 
     # Link is the most importnt content
     # Because we base on link
-    link = models.CharField(max_length=200)
+    link = models.URLField(max_length=200)
 
     # Description just like a small commnet about the post
     description = models.CharField('description', max_length=500)
