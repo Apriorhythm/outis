@@ -1,0 +1,56 @@
+{% extends 'outis_base/base.html' %}
+{% block outis_title %}Details{% endblock %}
+
+{% block outis_body %}
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-body">
+
+					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+
+						<div class="form-group">
+							<label class="control-label col-sm-2">Title</label>
+							<div class="col-sm-10">{{ object.title }}</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2">Link</label>
+							<div class="col-sm-10">{{ object.link }}</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2">Description</label>
+							<div class="col-sm-10">{{ object.description }}</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2">Tag</label>
+							<div class="col-sm-10">{{ object.tag }}</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="control-label col-sm-2">Attraction</label>
+							<div class="col-sm-10">
+                                <img src="uploads/{{ object.attraction }}"/>
+                            </div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" value="Update" class="btn btn-success">Update</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

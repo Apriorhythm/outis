@@ -40,8 +40,8 @@
 
 
 					<li>
-						<a  href="{% url 'index' %}">
-							<span class="glyphicon glyphicon-music"></span>&nbsp;Music
+						<a  href="{% url 'post:index' %}">
+							<span class="glyphicon glyphicon-music"></span>&nbsp;Misc
 
 						</a>
 					</li>
@@ -57,10 +57,10 @@
 					<ul class="nav navbar-nav navbar-right">
 					{% if user.is_authenticated %}
 						<li><a  href="{% url 'index' %}">{{ user.username }}</a></li>
-						<li><a  href="{% url 'index' %}">Logout</a></li>
+						<li><a  href="{% url 'user:logout' %}">Logout</a></li>
 					{% else %}
-						<li><a  href="{% url 'index' %}">Register</a></li>
-						<li><a  href="{% url 'index' %}">Login</a></li>
+						<li><a  href="{% url 'user:register' %}">Register</a></li>
+						<li><a  href="{% url 'user:login' %}">Login</a></li>
 					{% endif %}				
 
 					</ul>

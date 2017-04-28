@@ -43,7 +43,7 @@ class OutisPost(models.Model):
     down = models.IntegerField('down', default=0)
     # Every Post must have an attraction
     # attraction is picture, gif or smal movie
-    attraction = models.FileField()
+    attraction = models.FileField(upload_to='user/attraction/')
     post_date = models.DateTimeField(auto_now=True)
 
     comment_number = models.IntegerField(default=0)

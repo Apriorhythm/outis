@@ -1,0 +1,24 @@
+{% extends 'outis_base/base.html' %}
+{% block outis_title %}Details{% endblock %}
+
+{% block outis_body %}
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-body">
+
+                    <form role="form" class="form-horizontal" action="{% url 'post:post-add' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-default">Submit</button>
+
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
