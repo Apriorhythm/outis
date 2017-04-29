@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^index$', views.IndexView.as_view(), name='index'),
 
     # /post/detail/1234/
-    url(r'^detail/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^detail/(?P<pk>[0-9]+)/$', views.PostDetail.as_view(), name='detail'),
 
     # /post/add/
     url(r'^add$', views.PostCreate.as_view(), name='post-add'),

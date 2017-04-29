@@ -1,4 +1,5 @@
 from django.views import generic
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
@@ -16,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import PostForm
 from django import forms
 from django.views.generic import View
+from django.utils import timezone
 
 from .models import OutisPost
 from .models import OutisCategory
@@ -30,36 +32,31 @@ class IndexView(generic.ListView):
         return OutisPost.objects.all()
 
 
-@login_required
-def detail(request, pk):
-    post = get_object_or_404(OutisPost, id=pk)
-    #post_form = PostForm
+class PostDetail(DetailView):
+    model = OutisPost
     template_name = 'outis_post/detail.html'
 
-    print('##############################')
-    print('##############################')
 
-    return render(request, template_name, {
-        'object':post,
-    #    'post_form':post_form,
-    })
-
+    def get_context_data(self, **kwargs):
+        context = super(PostDetail, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
 
 class PostCreate(View):
     form_class = PostForm
     template_name = 'outis_post/postcreate.html'
 
     # display a blank form
+    @login_required
     def get(self, request):
         form = self.form_class(None)
         return render(request, self.template_name, {'form':form})
 
     # process form data
+    @login_required
     def post(self, request):
         form = self.form_class(request.POST, request.FILES)
-        print(form)
         if form.is_valid():
-            print('######################################')
             # cleaned (normalized) data
             new_post = OutisPost(
                 category_id = form.cleaned_data['category_id'],
@@ -69,13 +66,10 @@ class PostCreate(View):
                 tag = form.cleaned_data['tag'],
                 attraction = form.cleaned_data['attraction'],
             )
-            print('######################################')
             new_post.authord_id = request.user
-            print(new_post.authord_id)
             new_post.save()
-            print('######################################')
 
-            return  reverse_lazy('post:index')
+            return  redirect('/post/index')
 
 
 class PostUpdate(UpdateView):
