@@ -38,6 +38,7 @@ PREREQ_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'pure_pagination',
 ]
 
 PROJECT_APPS = [
@@ -140,6 +141,13 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname('__file__')))
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
 MEDIA_URL = '/uploads/'
 
+
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 10,
+    'MARGIN_PAGES_DISPLAYED': 2,
+
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}
 # #################### Outis #################### #
 
 
