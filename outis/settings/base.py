@@ -39,6 +39,7 @@ PREREQ_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'pure_pagination',
+    'django.contrib.humanize',
 ]
 
 PROJECT_APPS = [
