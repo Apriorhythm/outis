@@ -1,6 +1,12 @@
 {% extends 'outis_base/base.html' %}
 {% block outis_title %}Details{% endblock %}
 
+{% block outis_staticfiles %}
+{% load staticfiles %}
+    <script src="{% static '/js/detail.js' %}"></script>
+{% endblock %}
+
+
 {% block outis_body %}
 
 
@@ -27,6 +33,20 @@
                                 <span class="button-content">{{ object.down }}</span>
                             </span>
                         </span>
+
+                        <span>
+                            <span>
+                                <button id="collectionCollectPost" class="btn btn-default glyphicon glyphicon-heart" type="button" title="Collect"     value="{{ object.id }}"/>
+                            </span>
+
+                            <span>
+                                <button id="collectionRemovePost" class="btn btn-default glyphicon glyphicon-remove" type="button" title="Remove"     value="{{ object.id }}"/>
+                            </span>
+
+
+                        </span>
+
+
 					</form>
 				</div>
 			</div>
@@ -43,15 +63,16 @@
                         {% for comment in comment_list %}
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-                            <p>用户: {{ comment.user_id }}</p>
-                            <p>评论:{{ comment.post_id }}</p>
-                            <p>内容:{{ comment.content }}</p>
-                            <p>日期: {{ comment.post_date }}</p>
-                            <span>up: {{ comment.up }}</span>
-                            <span>down: {{ comment.down }}</span>
 
-					</form>
+                        <p><span>用户: {{ comment.user_id }}</span></p>
+
+
+                        <p>评论:{{ comment.post_id }}</p>
+                        <p>内容:{{ comment.content }}</p>
+                        <p>日期: {{ comment.post_date }}</p>
+                        <span>up: {{ comment.up }}</span>
+                        <span>down: {{ comment.down }}</span>
+
 				</div>
 			</div>
                         {% endfor %}
@@ -74,7 +95,7 @@
                       <div class="row">
                         <div class="col-md-12">
                             <div>
-                              <label for="{{ form.content.id_for_label }}">Comment:</label>
+                              <label for="{{ form.content.id_for_label }}"></label>
                             </div>
                             <div>
                               {{ form.content }}
@@ -83,9 +104,6 @@
                         </div>
                       </div>    <!-- row -->
                     </form>
-
-
-
 				</div>
 			</div>
 		</div>

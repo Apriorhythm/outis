@@ -3,4 +3,9 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-# Register your models here.
+from .models import OutisPostCollection, OutisUserCollection
+
+
+admin.site.register(OutisPostCollection)
+admin.site.register(OutisUserCollection)
+
