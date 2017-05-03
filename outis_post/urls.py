@@ -9,6 +9,9 @@ urlpatterns = [
     # /post/index
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^index$', views.IndexView.as_view(), name='index'),
+    url(r'^music$', views.MusicView.as_view(), name='music'),
+    url(r'^video$', views.VideoView.as_view(), name='video'),
+    url(r'^misc$', views.MiscView.as_view(), name='misc'),
 
     # /post/detail/1234/
     url(r'^detail/(?P<pk>[0-9]+)/$', views.PostDetail.as_view(), name='detail'),

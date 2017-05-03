@@ -17,9 +17,6 @@ Post-Index
 {% endblock %}
 
 {% block outis_body %}
-	<p><a href="{% url 'post:post-add' %}">Add Post</a><p>
-	<p><a href="#">Add ........</a><p>
-	<hr>
 
     <div id="container">
 	{% for post in all_post %}
@@ -62,8 +59,15 @@ Post-Index
 	</div>
 </div>
 
-{% endblock %}
 
+<div style="position:fixed; right:45px; bottom:45px; background-color:#C0C0C0; ">
+    <a href="{% url 'post:post-add' %}">
+        <span type="button" class="btn btn-group-lg glyphicon glyphicon-plus"></span>
+    </a>
+</div>
+
+
+{% endblock %}
 
 
 

@@ -61,6 +61,40 @@ class IndexView(PaginationMixin, APIView):
         queryset = OutisPost.objects.all()
         return Response({'all_post':queryset})
 
+class MusicView(PaginationMixin, APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'outis_post/index.html'
+    paginate_by = 20
+
+    def get(self, request):
+        queryset = OutisPost.objects.filter(category_id=2)
+        return Response({'all_post':queryset})
+
+
+class VideoView(PaginationMixin, APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'outis_post/index.html'
+    paginate_by = 20
+
+    def get(self, request):
+        queryset = OutisPost.objects.filter(category_id=3)
+        return Response({'all_post':queryset})
+
+
+class MiscView(PaginationMixin, APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'outis_post/index.html'
+    paginate_by = 20
+
+    def get(self, request):
+        queryset = OutisPost.objects.filter(category_id=1)
+        return Response({'all_post':queryset})
+
+
+
+
+
+
 class PostDetail(DetailView):
     model = OutisPost
     template_name = 'outis_post/detail.html'
