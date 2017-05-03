@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'', include('outis_base.urls')),
     url(r'^user/', include('outis_user.urls')),
     url(r'^post/', include('outis_post.urls')),
+    url(r'^collection/', include('outis_collection.urls')),
 
     url(r'^search/', include('haystack.urls')),
 

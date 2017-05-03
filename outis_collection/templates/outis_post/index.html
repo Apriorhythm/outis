@@ -1,0 +1,73 @@
+
+{% extends 'outis_base/base.html' %}
+
+{% block outis_title %}
+Post-Index
+{% endblock %}
+
+{% load humanize i18n %}
+
+{% block outis_staticfiles %}
+{% load staticfiles %}
+    <script src="{% static '/js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static '/js/masonry.pkgd.min.js' %}"></script>
+
+	<link type="text/css" rel="stylesheet" href="{% static '/css/index.css' %}" />
+    <script src="{% static '/js/index.js' %}"></script>
+{% endblock %}
+
+{% block outis_body %}
+
+    <div id="container">
+	{% for post in all_post %}
+        <div class="postBlock">
+            <div class="imgShell">
+                <a href="{% url 'post:detail' post.id %}">
+                    <img class="outisimg" src="{{ MEDIA_URL }}{{ post.attraction }}" width="33%" />
+                </a>
+            </div>
+
+            <div class="stuff">
+                <h3>
+                    <a href="{% url 'post:detail' post.id %}">
+                        {{ post.title }}
+                    </a>
+                </h3>
+
+                <div>{{ post.description }}</div>
+
+                <div id="operations">
+                    <!-- Update -->
+                    <div>
+                        <a href="{% url 'post:post-update' post.id %}">
+                            <button  class="btn btn-default">
+                                <span class="glyphicon glyphicon-pencil">Update</span>
+                            </button>
+                        </a>
+
+                    <!-- Delete -->
+                        <a href="{% url 'post:post-delete' post.id %}">
+                            <button  class="btn btn-default">
+                                <span class="glyphicon glyphicon-trash">Delete</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+	{% endfor %}
+	</div>
+</div>
+
+
+<div style="position:fixed; right:45px; bottom:45px; background-color:#C0C0C0; ">
+    <a href="{% url 'post:post-add' %}">
+        <span type="button" class="btn btn-group-lg glyphicon glyphicon-plus"></span>
+    </a>
+</div>
+
+
+{% endblock %}
+
+
+

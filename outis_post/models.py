@@ -1,4 +1,4 @@
-#coding:utf-8
+# -*- coding: utf-8 -*-
 """
 中文必须添加#coding:utf-8
 否则会出现乱码或服务器无法启动等奇怪现象
