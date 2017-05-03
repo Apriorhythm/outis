@@ -4,6 +4,8 @@ from . import views
 app_name = 'post'
 
 urlpatterns = [
+    url(r'^foo$', views.FooView.as_view(), name='foo'),
+
     # /post/index
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^index$', views.IndexView.as_view(), name='index'),
@@ -21,4 +23,10 @@ urlpatterns = [
     # /post/25/delete
     url(r'^(?P<pk>[0-9]+)/delete$', views.PostDelete.as_view(),
     name='post-delete'),
+
+    url(r'^titleSearch/', views.titleSearch, name='titleSearch'),
+
+
+    url(r'^comment/post/(?P<post_pk>[0-9]+)/$', views.CommentPost, name='post_comment'),
+
 ]

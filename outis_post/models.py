@@ -56,6 +56,10 @@ class OutisPost(models.Model):
         verbose_name = 'Outis_Post'
         verbose_name_plural = 'Outis_Post'
 
+    def get_absolute_url(self):
+        # 这里 reverse 解析 post:detail 视图函数对应的 url
+        return reverse('post:detail', kwargs={'id': self.pk})
+
 # Comments for post
 class OutisComment(models.Model):
     user_id = models.ForeignKey(OutisUser, on_delete=models.CASCADE)
@@ -66,8 +70,6 @@ class OutisComment(models.Model):
     up = models.IntegerField('up', default=0)
     down = models.IntegerField('down', default=0)
 
-    def __str__(self):
-        return self.id
 
     class Meta:
         verbose_name = 'Outis_Comment'

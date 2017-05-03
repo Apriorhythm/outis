@@ -9,22 +9,95 @@
 		<div class="col-sm-12 col-md-7">
 			<div class="panel panel-default">
 				<div class="panel-body">
-
 					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         <h1>{{ object.title}}</h1>
+                        <p><img class="outisimg" src="{{ MEDIA_URL }}{{ object.attraction }}" width="50%"  />
                         <p>Category: {{ object.category_id}}</p>
-                        <p>Link: <a href="{{ object.link}}">Link</a></p>
+                        <p>Link: <a href="{{ object.link}}">{{ object.link}}</a></p>
                         <p>Description: {{ object.description }}</p>
                         <p>Tag: {{ object.tag }}</p>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" value="Update" class="btn btn-success">Update</button>
-							</div>
-						</div>
+                        <span>
+                            <span>
+                                <button class="btn btn-default glyphicon glyphicon-arrow-up" type="button" title="I Like This" />
+                                <span class="button-content">{{ object.up }}</span>
+                            </span>
+                            <span>
+                                <button class="btn btn-default glyphicon glyphicon-arrow-down" type="button" title="I dislike this" />
+                                <span class="button-content">{{ object.down }}</span>
+                            </span>
+                        </span>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+<h1>评论</h1>
+<!-- Comment List -->
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 col-md-7">
+                        {% for comment in comment_list %}
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                            <p>用户: {{ comment.user_id }}</p>
+                            <p>评论:{{ comment.post_id }}</p>
+                            <p>内容:{{ comment.content }}</p>
+                            <p>日期: {{ comment.post_date }}</p>
+                            <span>up: {{ comment.up }}</span>
+                            <span>down: {{ comment.down }}</span>
+
+					</form>
+				</div>
+			</div>
+                        {% endfor %}
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Comment add -->
+<h1>我的评论</h1>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-body">
+
+                    <form action="{% url 'post:post_comment' object.id %}" method="post" class="comment-form">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                              <label for="{{ form.content.id_for_label }}">Comment:</label>
+                            </div>
+                            <div>
+                              {{ form.content }}
+                            </div>
+                          <button type="submit"><span>发表</span></button>
+                        </div>
+                      </div>    <!-- row -->
+                    </form>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
 {% endblock %}

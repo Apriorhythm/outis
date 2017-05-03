@@ -25,7 +25,10 @@ SECRET_KEY = 'z!!la!!&#&4-%^r+u#r%pyl$v8nl!g93nm6a+$hkqpl+2uqej0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.155.1',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -37,9 +40,11 @@ PREREQ_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'pure_pagination',
     'django.contrib.humanize',
+    'haystack',
 ]
 
 PROJECT_APPS = [
@@ -74,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -139,15 +145,25 @@ AUTH_USER_MODEL = "outis_user.OutisUser"
 
 # Upload Files
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname('__file__')))
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
-MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+MEDIA_URL = '/media/'
 
+# Default charset
+DEFAULT_CHARSET = 'UTF-8'
 
 PAGINATION_SETTINGS = {
     'PAGE_RANGE_DISPLAYED': 10,
     'MARGIN_PAGES_DISPLAYED': 2,
 
     'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}
+
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
 }
 # #################### Outis #################### #
 

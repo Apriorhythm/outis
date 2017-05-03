@@ -78,6 +78,7 @@ class LoginView(View):
 
         if user is not None:
             if user.is_active:
+                print(user)
                 login(request, user)
                 return redirect('user:profile')
 

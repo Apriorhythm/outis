@@ -17,8 +17,6 @@ class OutisUser(AbstractUser):
     logo = models.ImageField(upload_to='user/logo/', default='user/logo/default-logo.jpg')
     signature = models.CharField(max_length=128, default='吃惊')
 
-    def __str__(self):
-        return self.username
 
     class Meta:
         verbose_name = 'Outis_User'
