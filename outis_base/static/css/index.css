@@ -1,4 +1,38 @@
+
+
+h1 {
+    font-size:          15vw;
+    font-weight:        900;
+}
+
+
 .navbar{
 	border-radius: 0;
 }
+
+.OutisSpace {
+    font-family:'GreatVibes-Regular';
+}
+
+
+.left {
+    text-align:left;
+    margin-left: 25%;
+}
+
+
+.right {
+    text-align:right;
+    margin-right: 25%;
+}
+
+.align-right {
+    float:right;
+}
+
+
+
+
+
+
 

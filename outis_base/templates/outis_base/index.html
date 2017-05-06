@@ -1,9 +1,19 @@
-{% include 'outis_base/base.html' %}
-{% block outis_title %}
-<div class="jumbotron">
-    <div class="container">
-        <h1>Index Here</h1>
-    </div>
+
+
+{% extends 'outis_base/base.html' %}
+
+{% block outis_staticfiles %}
+    {% load staticfiles %}
+    <link type="text/css" rel="stylesheet" href="{% static '/css/index.css' %}">
+{% endblock %}
+
+{% block outis_body %}
+<div>
+    <h1 class="OutisSpace left">Outis</h1>
+    <h1 class="OutisSpace right">Space</h1>
 </div>
 {% endblock %}
+
+
+
 

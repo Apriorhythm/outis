@@ -1,5 +1,6 @@
-.navbar {
-	border-radius: 0;
+@font-face {
+    font-family:'GreatVibes-Regular';
+    src: url('/static/font/GreatVibes-Regular.ttf');
 }
 
 body {
@@ -7,3 +8,19 @@ body {
 }
 
 
+.navbar {
+	border-radius: 0;
+}
+
+#outis-navbar {
+    background:#C0C0C0;
+}
+
+
+#outis-navbar * {
+    color:#000000;
+}
+
+#mainContentDiv {
+    margin-top:0;
+}

@@ -9,13 +9,42 @@ User Profile
 
 
 {% block outis_body %}
-	<h1>Profile Here</h1>
 	{% if user.is_authenticated %}
-		<h2>{{ user.username }}</h2>
+		<h1>Hello! {{ user.username }}!</h1>
 	{% else %}
-		<p>Haven login</p>
-	 {% endif %}
+		<h1>Haven login</h1>
+    {% endif %}
 
+
+    {% for post in collect_posts %}
+        <div class="postDiv">
+            <h3>
+                <a href="{% url 'post:detail' post.id %}">
+                    {{ post.title }}
+                </a>
+            </h3>
+
+            <div>{{ post.description }}</div>
+
+            <div id="operations">
+                <!-- Update -->
+                <div>
+                    <a href="{% url 'post:post-update' post.id %}">
+                        <button  class="btn btn-default">
+                            <span class="glyphicon glyphicon-pencil">Update</span>
+                        </button>
+                    </a>
+
+                <!-- Delete -->
+                    <a href="{% url 'post:post-delete' post.id %}">
+                        <button  class="btn btn-default">
+                            <span class="glyphicon glyphicon-trash">Delete</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+    {% endfor %}
 
 {% endblock %}
 

@@ -1,6 +1,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{% block outis_title %}Outis Space{% endblock %}</title>
 
 	{% load staticfiles %}
@@ -16,72 +17,78 @@
 </head>
 
 <body>
-	<header class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="{% url 'index' %}">OS</a>
-			</div>
+<header class="navbar navbar-fixed-top" id="outis-navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'index' %}">OS</a>
+        </div>
 
-			<!-- item -->
-			<nav class="collapse navbar-collapse" id="topNavBar">
-				<ul class="nav navbar-nav">
+        <!-- item -->
+        <nav class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
 
-					<li>
-						<a  href="{% url 'post:index' %}">
-							<span class="glyphicon glyphicon-home"></span>&nbsp;Home
-						</a>
-					</li>
-
-
-					<li>
-						<a  href="{% url 'post:music' %}">
-							<span class="glyphicon glyphicon-music"></span>&nbsp;Music
-						</a>
-					</li>
-
-					<li>
-						<a  href="{% url 'post:video' %}">
-							<span class="glyphicon glyphicon-facetime-video"></span>&nbsp;Video
-						</a>
-					</li>
-
-					<li>
-						<a  href="{% url 'post:misc' %}">
-							<span class="glyphicon glyphicon-th-large"></span>&nbsp;Misc
-						</a>
-					</li>
+                <li>
+                    <a  href="{% url 'post:index' %}">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp;Home
+                    </a>
+                </li>
 
 
-				</ul>
+                <li>
+                    <a  href="{% url 'post:music' %}">
+                        <span class="glyphicon glyphicon-music"></span>&nbsp;Music
+                    </a>
+                </li>
 
-				<form class="navbar-form navbar-left"  method="get" action="{% url 'post:titleSearch' %}">
-					<div class="form-group">
-						<input type="text" class="form-control" name="q" value="">
-					</div>
-					<input type="submit" class="btn btn-default">Search</input>
-				</form>
-					<ul class="nav navbar-nav navbar-right">
-					{% if user.is_authenticated %}
-						<li><a  href="{% url 'index' %}">{{ user.username }}</a></li>
-						<li><a  href="{% url 'user:logout' %}">Logout</a></li>
-					{% else %}
-						<li><a  href="{% url 'user:register' %}">Register</a></li>
-						<li><a  href="{% url 'user:login' %}">Login</a></li>
-					{% endif %}
+                <li>
+                    <a  href="{% url 'post:video' %}">
+                        <span class="glyphicon glyphicon-facetime-video"></span>&nbsp;Video
+                    </a>
+                </li>
 
-					</ul>
+                <li>
+                    <a  href="{% url 'post:misc' %}">
+                        <span class="glyphicon glyphicon-th-large"></span>&nbsp;Misc
+                    </a>
+                </li>
 
-			</nav>
-		</div>
-	</header>
 
-{% block outis_body %}
-{% endblock %}
+                <li>
+                    <form class="navbar-form form-search" method="get" action="{% url 'post:titleSearch' %}">
+                        <div class="form-group">
+                            <input type="text" class="form-control input-medium search-query"
+                                name="q"  laceholder="Search">
+                        </div>
+                    </form>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+                <li><a  href="{% url 'user:profile' %}">{{ user.username }}</a></li>
+                <li><a  href="{% url 'user:logout' %}">LOGOUT</a></li>
+            {% else %}
+                <li><a  href="{% url 'user:register' %}">REGISTER</a></li>
+                <li><a  href="{% url 'user:login' %}">LOGIN</a></li>
+            {% endif %}
+
+            </ul>
+
+        </nav>
+    </div>
+</header>
+
+<div id="mainContentDiv">
+    {% block outis_body %}
+        <p>Outis</p>
+    {% endblock %}
+</div>
+
 </body>
 </html>
 

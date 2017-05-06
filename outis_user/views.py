@@ -15,6 +15,9 @@ from django.views.generic import View
 from .forms import RegisterForm, LoginForm
 from django import forms
 
+from outis_collection.models import OutisPostCollection, OutisUserCollection
+from outis_post.models import OutisPost
+from outis_user.models import OutisUser
 
 #def login(request):
 #    return render(request, 'outis_user/login.html')
@@ -90,11 +93,40 @@ class LoginView(View):
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect('user:profile')
+        return redirect('post:index')
 
 class ProfileView(View):
     def get(self, request):
-        return render(request, 'outis_user/profile.html')
+        collect_posts = OutisPost.objects.filter(
+            pk__in=request.user.outispostcollection_set.values('post_id')
+        )
+
+        return render(request,
+            'outis_user/profile.html',
+            {'collect_posts': collect_posts},
+        )
+
+
+
+class PeekUserView(View):
+    def get(self, request, user_pk):
+        peeked_user = OutisUser.objects.get(pk=user_pk)
+
+        return render(request,
+            'outis_user/peek.html',
+            {'peeked_user': peeked_user},
+        )
+
+
+
+
+
+
+
+
+
+
+
 
 
 

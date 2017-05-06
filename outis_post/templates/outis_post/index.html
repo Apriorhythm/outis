@@ -35,25 +35,9 @@ Post-Index
                 </h3>
 
                 <div>{{ post.description }}</div>
-
-                <div id="operations">
-                    <!-- Update -->
-                    <div>
-                        <a href="{% url 'post:post-update' post.id %}">
-                            <button  class="btn btn-default">
-                                <span class="glyphicon glyphicon-pencil">Update</span>
-                            </button>
-                        </a>
-
-                    <!-- Delete -->
-                        <a href="{% url 'post:post-delete' post.id %}">
-                            <button  class="btn btn-default">
-                                <span class="glyphicon glyphicon-trash">Delete</span>
-                            </button>
-                        </a>
-                    </div>
-                </div>
+                <div><a href="{{ post.link}}">{{ post.link}}</a></div>
             </div>
+
         </div>
 	{% endfor %}
 	</div>
