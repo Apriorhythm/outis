@@ -7,4 +7,4 @@ class OutisPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OutisPost
-        fields = ('category_id', 'title', 'link', 'description', 'tag', 'attraction')
+        fields = ('id', 'category_id', 'title', 'link', 'description', 'tag', 'attraction')

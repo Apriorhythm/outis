@@ -1,0 +1,19 @@
+#username_span {
+    font-family:'GreatVibes-Regular';
+    font-weight:888;
+    font-size:90px;
+}
+
+
+.relatedLink {
+    border-bottom:1px solid #C0C0C0;
+}
+
+.activeButton {
+    background:#C0C0C0;
+}
+
+.relatedLink * {
+    color:#000000;
+}
+

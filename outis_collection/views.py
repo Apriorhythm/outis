@@ -4,8 +4,17 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
+from rest_framework.generics import ListAPIView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.renderers import TemplateHTMLRenderer
+
+from pure_pagination.mixins import PaginationMixin
+
 from .models import OutisPostCollection, OutisUserCollection
 from outis_post.models import OutisPost
+from outis_post.serializers import OutisPostSerializer
 from outis_user.models import OutisUser
 
 
@@ -25,6 +34,17 @@ def RemovePost(request, post_pk):
     ).delete()
 
     return HttpResponse("1")
+
+
+class personalPostCollection(PaginationMixin, APIView):
+
+    def get(self, request):
+        posts = OutisPost.objects.filter(
+            pk__in=request.user.outispostcollection_set.values('post_id')
+        )
+        serializer = OutisPostSerializer(posts, many=True)
+
+        return Response(serializer.data)
 
 
 def CollectUser(request, user_pk):

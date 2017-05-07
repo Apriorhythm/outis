@@ -1,50 +1,72 @@
 {% extends 'outis_base/base.html' %}
 
 {% block outis_title %}
-User Profile
+Profile
 {% endblock %}
 
 {% block outis_staticfiles %}
+    {% load staticfiles %}
+    <link type="text/css" rel="stylesheet" href="{% static '/css/profile.css' %}" />
+    <script src="{% static '/js/profile.js' %}"></script>
 {% endblock %}
 
 
 {% block outis_body %}
-	{% if user.is_authenticated %}
-		<h1>Hello! {{ user.username }}!</h1>
-	{% else %}
-		<h1>Haven login</h1>
-    {% endif %}
+<div class="container-fluid">
+    <div id="userProfile" class="row">
+        <div class="col-md-3">
+            {% if user.is_authenticated %}
+                <span id="username_span">{{ user.username }}</span>
+            {% endif %}
+            &nbsp;&nbsp;&nbsp;
+        </div>
+
+        <div class="dropdown col-md-1" >
+          <a class="dropdown-toggle" type="button" id="profileConfigDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <i class="fa fa-cog fa-3x"></i>
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="profileConfigDropdown">
+            <li><a href="#">Change Profile</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Destroy My Account</a></li>
+          </ul>
+        </div>
+
+    </div>
+</div>
 
 
-    {% for post in collect_posts %}
-        <div class="postDiv">
-            <h3>
-                <a href="{% url 'post:detail' post.id %}">
-                    {{ post.title }}
-                </a>
-            </h3>
 
-            <div>{{ post.description }}</div>
 
-            <div id="operations">
-                <!-- Update -->
-                <div>
-                    <a href="{% url 'post:post-update' post.id %}">
-                        <button  class="btn btn-default">
-                            <span class="glyphicon glyphicon-pencil">Update</span>
-                        </button>
-                    </a>
+<div class="container-fluid" id="contentContainer" >
+    <div class="row" >
+        <div class="col-md-3"><span></span></div>
+        <div class="col-md-6">
+            <ul class="nav nav-pills nav-justified">
+                {% csrf_token %}
+                <li class="relatedLink activeButton"><a id="generateRelation">Link</a></li>
+                <li class="relatedLink">
+                    <a id="postCollection" href="javascript:void(0);" onclick="postCollectionClick()">Post</a>
+                </li>
+                <li class="relatedLink"><a id="peopleCollection">People</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3"><span></span></div>
+    </div>
 
-                <!-- Delete -->
-                    <a href="{% url 'post:post-delete' post.id %}">
-                        <button  class="btn btn-default">
-                            <span class="glyphicon glyphicon-trash">Delete</span>
-                        </button>
-                    </a>
-                </div>
-            </div>
+    <br>
 
-    {% endfor %}
+    <div class="row" id="personalContent"></div>
+
+</div>
 
 {% endblock %}
+
+
+
+
+
 

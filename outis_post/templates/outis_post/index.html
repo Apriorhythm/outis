@@ -2,7 +2,7 @@
 {% extends 'outis_base/base.html' %}
 
 {% block outis_title %}
-Post-Index
+POST
 {% endblock %}
 
 {% load humanize i18n %}
@@ -43,10 +43,9 @@ Post-Index
 	</div>
 </div>
 
-
-<div style="position:fixed; right:45px; bottom:45px; background-color:#C0C0C0; ">
+<div style="position:fixed; right:45px; bottom:45px;">
     <a href="{% url 'post:post-add' %}">
-        <span type="button" class="btn btn-group-lg glyphicon glyphicon-plus"></span>
+        <i class="fa fa-plus-circle fa-3x" aria-hidden="true" title="Add Post"></i>
     </a>
 </div>
 
