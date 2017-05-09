@@ -15,9 +15,17 @@ from django.views.generic import View
 from .forms import RegisterForm, LoginForm
 from django import forms
 
+from rest_framework.generics import ListAPIView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.renderers import TemplateHTMLRenderer
+
+
 from outis_collection.models import OutisPostCollection, OutisUserCollection
 from outis_post.models import OutisPost
 from outis_user.models import OutisUser
+from .serializers import OutisUserSerializer
+
 
 #def login(request):
 #    return render(request, 'outis_user/login.html')

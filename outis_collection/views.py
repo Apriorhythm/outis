@@ -16,6 +16,7 @@ from .models import OutisPostCollection, OutisUserCollection
 from outis_post.models import OutisPost
 from outis_post.serializers import OutisPostSerializer
 from outis_user.models import OutisUser
+from outis_user.serializers import OutisUserSerializer
 
 
 def CollectPost(request, post_pk):
@@ -64,6 +65,17 @@ def RemoveUser(request, user_pk):
 
     return HttpResponse("1")
 
+
+
+class personalUserCollection(PaginationMixin, APIView):
+
+    def get(self, request):
+        users = OutisUser.objects.filter(
+            pk__in=OutisUserCollection.objects.filter(main_user_id=request.user)
+        )
+        serializer = OutisPostSerializer(users, many=True)
+
+        return Response(serializer.data)
 
 
 

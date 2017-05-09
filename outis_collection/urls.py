@@ -11,4 +11,6 @@ urlpatterns = [
 
     url(r'^user/(?P<user_pk>[0-9a-f-]+)/collect$', views.CollectUser, name='collect_post'),
     url(r'^user/(?P<user_pk>[0-9a-f-]+)/remove$', views.RemoveUser, name='remove_post'),
+    url(r'^user/personalUserCollection/$',
+        views.personalUserCollection.as_view(), name='personal_user_collection'),
 ]

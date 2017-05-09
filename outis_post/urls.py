@@ -32,4 +32,11 @@ urlpatterns = [
 
     url(r'^comment/post/(?P<post_pk>[0-9]+)/$', views.CommentPost, name='post_comment'),
 
+    # /post/25/comments
+    url(r'^(?P<post_pk>[0-9]+)/comments$', views.GetPostComment.as_view(), name='get_comments'),
+
+
+
+
 ]
+

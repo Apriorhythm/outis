@@ -36,7 +36,7 @@ from haystack.forms import SearchForm
 from .models import OutisPost
 from .models import OutisComment
 from .models import OutisCategory
-from .serializers import OutisPostSerializer
+from .serializers import OutisPostSerializer, OutisCommentSerializer
 
 from .forms import OutisCommentForm
 
@@ -101,9 +101,9 @@ class PostDetail(DetailView):
 
     # 新增 form 到 context
     def get_context_data(self, **kwargs):
-        kwargs['comment_list'] = self.object.outiscomment_set.all()
         kwargs['form'] = OutisCommentForm()
         return super(PostDetail, self).get_context_data(**kwargs)
+
 
 class PostCreate(View):
     form_class = PostForm
@@ -191,5 +191,13 @@ def CommentPost(request, post_pk):
         'comment_list': post.outiscomment_set.all(),
     })
 
+
+class GetPostComment(PaginationMixin, APIView):
+
+    def get(self, request, post_pk):
+        comments = OutisComment.objects.filter(post_id=post_pk)
+        serializer = OutisCommentSerializer(comments, many=True)
+
+        return Response(serializer.data)
 
 

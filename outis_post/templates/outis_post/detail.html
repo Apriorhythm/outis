@@ -17,6 +17,7 @@
 				<div class="panel-body">
 					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         <h1>{{ object.title}}</h1>
+                        <input style="display:none;" id="post_pk_input" value="{{ object.id }}" />
                         <h3>From: {{ object.authord_id }}</h3>
                         <p><img class="outisimg" src="{{ MEDIA_URL }}{{ object.attraction }}" width="50%"  />
                         <p>Category: {{ object.category_id}}</p>
@@ -58,26 +59,9 @@
 <h1>评论</h1>
 <!-- Comment List -->
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-12 col-md-7">
-                        {% for comment in comment_list %}
-			<div class="panel panel-default">
-				<div class="panel-body">
-
-                        <p><span>用户: {{ comment.user_id }}</span></p>
-
-
-                        <p>评论:{{ comment.post_id }}</p>
-                        <p>内容:{{ comment.content }}</p>
-                        <p>日期: {{ comment.post_date }}</p>
-                        <span>up: {{ comment.up }}</span>
-                        <span>down: {{ comment.down }}</span>
-
-				</div>
-			</div>
-                        {% endfor %}
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-sm-12 col-md-7" id="commentDiv"></div>
+    </div>
 </div>
 
 
