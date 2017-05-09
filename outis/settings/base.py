@@ -51,7 +51,9 @@ PROJECT_APPS = [
     'outis_base',
     'outis_post',
     'outis_user',
+    'outis_comment',
     'outis_collection',
+    'outis_vote',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS

@@ -33,12 +33,12 @@ from pure_pagination.mixins import PaginationMixin
 
 from haystack.forms import SearchForm
 
-from .models import OutisPost
-from .models import OutisComment
-from .models import OutisCategory
-from .serializers import OutisPostSerializer, OutisCommentSerializer
+from outis_comment.models import OutisPostComment
+from .models import OutisPost, OutisCategory
+from .serializers import OutisPostSerializer
+from outis_comment.serializers import OutisPostCommentSerializer
 
-from .forms import OutisCommentForm
+from outis_comment.forms import OutisPostCommentForm
 
 class FooView(PaginationMixin, APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -101,7 +101,7 @@ class PostDetail(DetailView):
 
     # 新增 form 到 context
     def get_context_data(self, **kwargs):
-        kwargs['form'] = OutisCommentForm()
+        kwargs['form'] = OutisPostCommentForm()
         return super(PostDetail, self).get_context_data(**kwargs)
 
 
@@ -155,49 +155,5 @@ def titleSearch(request):
 
     print('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
     return render_to_response(template_name, {'all_post':queryset})
-
-
-
-
-def CommentPost(request, post_pk):
-
-    post = get_object_or_404(OutisPost, pk=post_pk)
-
-    if request.method == 'POST':
-        form = OutisCommentForm(request.POST)
-
-        if form.is_valid():
-            comment = OutisComment(content = form.cleaned_data['content'])
-            comment.user_id = request.user
-            comment.post_id = post
-            comment.save()
-
-            return redirect('post:index')
-        else:
-            # 注意这里我们用到了 post.comment_set.all() 方法
-            # 这个用法有点类似于 Post.objects.all()
-            # 其作用是获取这篇 post 下的的全部评论
-            # 因为 Post 和 Comment 是 ForeignKey 关联的
-            # 因此使用 post.comment_set.all() 反向查询全部评论
-            # 正向查询就直接是 comment.post
-            return render(request, 'outis_post/detail.html', {
-                'form': form,
-                'post': post,
-                'comment_list': post.outiscomment_set.all(),
-            })
-    return render(request, 'outis_post/detail.html', {
-        'form': form,
-        'post': post,
-        'comment_list': post.outiscomment_set.all(),
-    })
-
-
-class GetPostComment(PaginationMixin, APIView):
-
-    def get(self, request, post_pk):
-        comments = OutisComment.objects.filter(post_id=post_pk)
-        serializer = OutisCommentSerializer(comments, many=True)
-
-        return Response(serializer.data)
 
 

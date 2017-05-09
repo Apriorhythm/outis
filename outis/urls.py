@@ -30,6 +30,8 @@ urlpatterns = [
     url(r'^user/', include('outis_user.urls')),
     url(r'^post/', include('outis_post.urls')),
     url(r'^collection/', include('outis_collection.urls')),
+    url(r'^comment/', include('outis_comment.urls')),
+    url(r'^vote/', include('outis_vote.urls')),
 
     url(r'^search/', include('haystack.urls')),
 

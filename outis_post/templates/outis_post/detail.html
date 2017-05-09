@@ -74,7 +74,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 
-                    <form action="{% url 'post:post_comment' object.id %}" method="post" class="comment-form">
+                    <form action="{% url 'comment:post_comment' object.id %}" method="post" class="comment-form">
                       {% csrf_token %}
                       <div class="row">
                         <div class="col-md-12">

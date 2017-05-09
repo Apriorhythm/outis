@@ -64,12 +64,12 @@ $(function(){
 
 function getComments() {
     post_pk = $("#post_pk_input").val();
-    $.get('/post/' + post_pk + '/comments',function(data){
+    $.get('/comment/post/' + post_pk ,function(data){
         $("#commentDiv").html("");
         $.each(data, function(index, comment) {
 
             comment_date = comment.post_date.split('T')[0];
-            comment_time = comment.post_date.split('T')[1].split('Z')[0];
+            comment_time = comment.post_date.split('T')[1].split('.')[0];
 
             singleComment = "" +
                 "<section class='comment-thread' >" +
@@ -86,7 +86,7 @@ function getComments() {
                             "<div class='comment-header'>" +
                                 "<a href='/user/peek/" + comment.user_id + "' >" + comment.username + "</a>" +
                                 "&nbsp;&nbsp;&nbsp;" +
-                                "<span class='time'>" + comment_date + "&nbsp;&nbsp;" + comment_time + "</span>" +
+                                "<span class='time'>" + comment_date + "&nbsp;/&nbsp;" + comment_time + "</span>" +
                             "</div>" +
 
                             "<div class='comment-text' role='article'>" +
