@@ -42,7 +42,7 @@ from .forms import OutisPostCommentForm
 
 
 
-
+@login_required
 def PostPostComment(request, post_pk):
 
     post = get_object_or_404(OutisPost, pk=post_pk)
