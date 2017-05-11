@@ -16,6 +16,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <h1>{{ object.title}}</h1>
                         <input style="display:none;" id="post_pk_input" value="{{ object.id }}" />
                         <h3>From: {{ object.authord_id }}</h3>
@@ -26,11 +27,11 @@
                         <p>Tag: {{ object.tag }}</p>
                         <span>
                             <span>
-                                <button class="btn btn-default glyphicon glyphicon-arrow-up" type="button" title="I Like This" />
+                                <button ratting="up" class="btn btn-default glyphicon glyphicon-arrow-up postVote" type="button" title="I Like This" />
                                 <span class="button-content">{{ object.up }}</span>
                             </span>
                             <span>
-                                <button class="btn btn-default glyphicon glyphicon-arrow-down" type="button" title="I dislike this" />
+                                <button ratting="down" class="btn btn-default glyphicon glyphicon-arrow-down postVote" type="button" title="I dislike this" />
                                 <span class="button-content">{{ object.down }}</span>
                             </span>
                         </span>

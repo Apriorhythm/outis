@@ -3,9 +3,13 @@ from __future__ import unicode_literals
 
 from rest_framework import serializers
 
-from .models import OutisComment
+from outis_post.models import OutisPost, OutisComment
+from outis_user.models import OutisUser
 
 
+
+
+"""
 class OutisCommentSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField()
     user_logo = serializers.SerializerMethodField()
@@ -19,4 +23,5 @@ class OutisCommentSerializer(serializers.ModelSerializer):
 
     def get_user_logo(self, comment):
         return comment.user_id.logo.url
+"""
 

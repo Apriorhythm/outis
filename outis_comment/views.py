@@ -34,11 +34,11 @@ from pure_pagination.mixins import PaginationMixin
 from haystack.forms import SearchForm
 
 from outis_post.models import OutisPost, OutisCategory
-from .models import OutisPostComment
+from .models import OutisComment
 
-from .serializers import OutisPostCommentSerializer
+from .serializers import OutisCommentSerializer
 
-from .forms import OutisPostCommentForm
+from .forms import OutisCommentForm
 
 
 
@@ -48,10 +48,10 @@ def PostPostComment(request, post_pk):
     post = get_object_or_404(OutisPost, pk=post_pk)
 
     if request.method == 'POST':
-        form = OutisPostCommentForm(request.POST)
+        form = OutisCommentForm(request.POST)
 
         if form.is_valid():
-            comment = OutisPostComment(content = form.cleaned_data['content'])
+            comment = OutisComment(content = form.cleaned_data['content'])
             comment.user_id = request.user
             comment.post_id = post
             comment.save()
@@ -79,8 +79,8 @@ def PostPostComment(request, post_pk):
 class GetPostComment(PaginationMixin, APIView):
 
     def get(self, request, post_pk):
-        comments = OutisPostComment.objects.filter(post_id=post_pk)
-        serializer = OutisPostCommentSerializer(comments, many=True)
+        comments = OutisComment.objects.filter(post_id=post_pk)
+        serializer = OutisCommentSerializer(comments, many=True)
 
         return Response(serializer.data)
 

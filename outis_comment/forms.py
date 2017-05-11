@@ -2,12 +2,12 @@
 
 from django import forms
 
-from .models import OutisPostComment
+from .models import OutisComment
 
-class OutisPostCommentForm(forms.ModelForm):
+class OutisCommentForm(forms.ModelForm):
     class Meta:
         """指定一些 Meta 选项以改变 form 被渲染后的样式"""
-        model = OutisPostComment # form 关联的 Model
+        model = OutisComment # form 关联的 Model
 
         fields = ['content']
 

@@ -7,10 +7,11 @@ from outis_user.models import OutisUser
 from outis_post.models import OutisPost
 
 # Comments for post
-class OutisPostComment(models.Model):
+class OutisComment(models.Model):
     user_id = models.ForeignKey(OutisUser, on_delete=models.CASCADE)
     # Comments for every Post
     post_id = models.ForeignKey(OutisPost, on_delete=models.CASCADE)
+    reply_to = models.ForeignKey('OutisComment', on_delete=models.CASCADE, default=1)
     content = models.CharField('content', max_length=500)
     post_date = models.DateTimeField(auto_now=True)
     up = models.IntegerField('up', default=0)

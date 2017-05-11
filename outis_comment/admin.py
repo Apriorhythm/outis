@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from .models import OutisPostComment
+from .models import OutisComment
 
-admin.site.register(OutisPostComment)
+admin.site.register(OutisComment)
 
 

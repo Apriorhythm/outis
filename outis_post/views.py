@@ -33,12 +33,12 @@ from pure_pagination.mixins import PaginationMixin
 
 from haystack.forms import SearchForm
 
-from outis_comment.models import OutisPostComment
+from outis_comment.models import OutisComment
 from .models import OutisPost, OutisCategory
 from .serializers import OutisPostSerializer
-from outis_comment.serializers import OutisPostCommentSerializer
+from outis_comment.serializers import OutisCommentSerializer
 
-from outis_comment.forms import OutisPostCommentForm
+from outis_comment.forms import OutisCommentForm
 
 class FooView(PaginationMixin, APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -101,7 +101,7 @@ class PostDetail(DetailView):
 
     # 新增 form 到 context
     def get_context_data(self, **kwargs):
-        kwargs['form'] = OutisPostCommentForm()
+        kwargs['form'] = OutisCommentForm()
         return super(PostDetail, self).get_context_data(**kwargs)
 
 
