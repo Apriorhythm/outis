@@ -41,12 +41,12 @@ function peopleCollectionClick() {
         $("#personalContent").html("");
         $.each(data, function(index, user) {
             newHTML = "" +
-                "<div class='peopleBlock'  style='width:100px;height:100px;border-radius:50px;border:solid rgb(100,100,100) 1px' >" +
-                    "<div class='imgShell' style='background-color: rgb(239, 239, 239); padding-bottom: 100%;'>" +
-                        "<img alt='logo' class='block col-12 absolute' src='" + user.logo + "'>" +
+                "<div class='peopleBlock' >" +
+                    "<div class='imgShell' >" +
+                        "<img alt='logo' src='" + user.logo + "' style='width:100px;height:100px;border-radius:50%;'>" +
                     "</div>" +
-                    "<div class='usernameShell'>"
-                        "<span>" + user.username + "</span>"
+                    "<div class='usernameShell'>" +
+                        "<span>" + user.username + "</span>" +
                     "</div>"
                 "</div>";
 

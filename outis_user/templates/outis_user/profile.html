@@ -16,7 +16,7 @@ Profile
     <div id="userProfile" class="row">
         <div class="col-md-4">
             {% if user.is_authenticated %}
-            <span><img src="{{ MEDIA_URL }}{{ user.logo }}"></img></span>
+            <span><img src="{{ MEDIA_URL }}{{ user.logo }}" style="width:100px;height:100px;border-radius:50%;"></img></span>
             <span id="username_span">{{ user.username }}</span>
             {% endif %}
         </div>

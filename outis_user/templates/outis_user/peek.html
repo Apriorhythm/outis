@@ -5,12 +5,29 @@ User Profile
 {% endblock %}
 
 {% block outis_staticfiles %}
+    {% load staticfiles %}
+    <script src="{% static '/js/peek.js' %}"></script>
 {% endblock %}
 
 
 {% block outis_body %}
 <h1>Peek</h1>
     {{ peeked_user.username }}
+
+    <span>
+        <span>
+            <button id="collectionCollectUser" class="btn btn-default glyphicon glyphicon-heart" type="button" title="Collect"     value="{{ peeked_user.id }}"/>
+        </span>
+
+        <span>
+            <button id="collectionRemovePost" class="btn btn-default glyphicon glyphicon-remove" type="button" title="Remove"     value="{{ peeked_user.id }}"/>
+        </span>
+
+
+    </span>
+
+
+
 
 {% endblock %}
 

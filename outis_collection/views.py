@@ -71,9 +71,10 @@ class personalUserCollection(PaginationMixin, APIView):
 
     def get(self, request):
         users = OutisUser.objects.filter(
-            pk__in=OutisUserCollection.objects.filter(main_user_id=request.user)
+            pk__in=OutisUserCollection.objects.filter(
+                main_user_id=request.user).values('main_user_id')
         )
-        serializer = OutisPostSerializer(users, many=True)
+        serializer = OutisUserSerializer(users, many=True)
 
         return Response(serializer.data)
 
