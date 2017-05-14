@@ -168,6 +168,23 @@ function peopleCollectionClick() {
 }
 
 
+function destroyMyAccount() {
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+    var requestData = {
+        'csrfmiddlewaretoken':csrftoken,
+    }
+    var url = '/user/destroy';
+    $.post(url, requestData, function(data){
+        if ("1" == data + "")
+            window.location.href = '/';
+        else
+            alert("FUCK");
+    });
+
+}
+
+
+
 
 
 

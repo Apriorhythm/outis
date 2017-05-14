@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^logout$', login_required(views.LogoutView.as_view()), name='logout'),
     url(r'^profile$', login_required(views.ProfileView.as_view()), name='profile'),
     url(r'^peek/(?P<user_pk>[0-9a-f-]+)$', views.PeekUserView.as_view(), name='peek'),
+    url(r'^destroy$', views.DestroyUser.as_view(), name='destroy'),
     #url(r'^validate$', views.validate, name='validate'),
 
     # /user/username/

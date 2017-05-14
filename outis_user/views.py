@@ -126,6 +126,14 @@ class PeekUserView(View):
         )
 
 
+class DestroyUser(APIView):
+    def post(self, request):
+        user = request.user
+        user.is_active = False
+        user.save()
+        return HttpResponse("1")
+
+
 
 
 
