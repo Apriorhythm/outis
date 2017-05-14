@@ -1,3 +1,1 @@
-{{ object.title }}
-{{ object.attraction }}
 {{ object.description }}

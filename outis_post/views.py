@@ -32,6 +32,8 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from pure_pagination.mixins import PaginationMixin
 
 from haystack.forms import SearchForm
+from haystack.generic_views import SearchView
+
 
 from outis_comment.models import OutisComment
 from .models import OutisPost, OutisCategory
@@ -140,13 +142,25 @@ class PostUpdate(UpdateView):
     fields = ['title', 'link', 'description', 'tag', 'attraction']
     template_name = 'outis_post/post_form.html'
 
-class PostDelete(DeleteView):
-    model = OutisPost
-    success_url = reverse_lazy('post:index')
+
+class PostDelete(APIView):
+    def post(self, request):
+        OutisPost.objects.get(pk=request.POST.get('post_id')).delete()
+
+        return Response('1')
 
 
+class TitleSearch(SearchView):
+    def get(self, request):
+        keywords = request.GET['q']
+        sform = SearchForm(request.GET)
+        queryset = sform.search()
+        template_name = 'outis_post/index.html'
+
+        return render_to_response(template_name, {'all_post':queryset})
 
 
+"""
 def titleSearch(request):
     keywords = request.GET['q']
     sform = SearchForm(request.GET)
@@ -154,6 +168,18 @@ def titleSearch(request):
     template_name = 'outis_post/foo.html'
 
     print('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
+
+    print('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
+
     return render_to_response(template_name, {'all_post':queryset})
+"""
+
+class AllMyPost(PaginationMixin, APIView):
+    def get(self, request):
+        posts = OutisPost.objects.filter(authord_id=request.user)
+        serializer = OutisPostSerializer(posts, many=True)
+
+        return Response(serializer.data)
+
 
 

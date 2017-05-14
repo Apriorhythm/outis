@@ -7,6 +7,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.urls import reverse
 
 from outis_user.models import OutisUser
 
@@ -58,5 +59,5 @@ class OutisPost(models.Model):
 
     def get_absolute_url(self):
         # 这里 reverse 解析 post:detail 视图函数对应的 url
-        return reverse('post:detail', kwargs={'id': self.pk})
+        return reverse('post:detail', kwargs={'pk': self.pk})
 

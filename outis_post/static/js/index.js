@@ -1,44 +1,41 @@
+$(function() {
+    var $container = $('#postContainer');
+    $container.imagesLoaded(function() {
+        $container.masonry({
+                itemSelector: '.grid-item',
+                gutter: 20,
+                isAnimated: true,
+            });
+     });
+})
 
 /*
-$(document).ready(function() {
-    $('img').each(function(){
-        var imgHeight = $(this).height();
-        var imgWidth = $(this).width();
-        /* switch range from [0, 1] to [0.2, 0.6]
-         * formula:
-         *  range: [a1, b1] -> [a2, b2]
-         *  input: x
-         *  ouput: a2 + (x/(b1-a1))*(b2-a2)
-
-        sizeOfImg = 0.2 + Math.random() * 0.4;
-        $(this).parent().parent().parent().height(imgHeight*sizeOfImg);
-        $(this).parent().parent().parent().width(imgWidth*sizeOfImg);
-        $(this).height('100%');
-        $(this).width('100%');
-
+$(function() {
+    var $objbox = $("#postContainer");
+    var gutter = 25;
+    var centerFunc, $top0;
+    $objbox.imagesLoaded(function() {
+        $objbox.masonry({
+            itemSelector: "#postContainer > .grid-item",
+            gutter: gutter,
+            isAnimated: true
+        });
+        centerFunc = function() {
+            $top0 = $objbox.children("[style*='top: 0']");
+            $objbox.css("left", ($objbox.width() - ($top0.width() * $top0.length + gutter * ($top0.length - 1))) / 2).parent().css("overflow", "hidden");
+        };
+        centerFunc();
     });
-    $('#container').masonry({
-        columnWidth: 320,
-        itemSelector: '.postBlock',
-        isFitWidth: true,
-    }).imagesLoaded(function() {
-        $('#container').masonry('reload');
+    var tur = true;
+    $(window).resize(function() {
+        if (tur) {
+            setTimeout(function() {
+                tur = true;
+                centerFunc();
+            },
+            1000);
+            tur = false;
+        }
     });
 });
-
 */
-
-
-
-
-$(document).ready(function() {
-    $('img').each(function(){
-
-        //$(this).parent().parent().parent().height(imgHeight*0.33%);
-        //$(this).parent().parent().parent().width(imgWidth*0.33);
-        $(this).height('30%');
-        $(this).width('30%');
-    });
-
-
-});
