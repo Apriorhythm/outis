@@ -28,13 +28,15 @@ def CollectPost(request, post_pk):
 
     return HttpResponse("1")
 
-def RemovePost(request, post_pk):
-    OutisPostCollection.objects.filter(
-        post_id = OutisPost.objects.get(pk=post_pk),
-        user_id = request.user,
-    ).delete()
 
-    return HttpResponse("1")
+class RemovePost(PaginationMixin, APIView):
+    def post(self, request):
+        OutisPostCollection.objects.filter(
+            post_id = OutisPost.objects.get(pk=request.POST.get('post_id')),
+            user_id = request.user,
+        ).delete()
+
+        return HttpResponse("1")
 
 
 class personalPostCollection(PaginationMixin, APIView):
@@ -57,13 +59,15 @@ def CollectUser(request, user_pk):
 
     return HttpResponse("1")
 
-def RemoveUser(request, user_pk):
-    OutisUserCollection.objects.filter(
-        main_user_id = request.user,
-        sub_user_id = OutisUser.objects.get(pk=user_pk),
-    ).delete()
 
-    return HttpResponse("1")
+class RemoveUser(PaginationMixin, APIView):
+    def post(self, request):
+        OutisUserCollection.objects.filter(
+            main_user_id = request.user,
+            sub_user_id = OutisUser.objects.get(pk=request.POST.get('user_id')),
+        ).delete()
+
+        return HttpResponse("1")
 
 
 
