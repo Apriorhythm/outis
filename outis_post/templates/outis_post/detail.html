@@ -12,42 +12,56 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-12 col-md-7">
+		<div class="col-sm-12 col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <h1>{{ object.title}}</h1>
-                        <input style="display:none;" id="post_pk_input" value="{{ object.id }}" />
-                        <h3>From: {{ object.authord_id }}</h3>
-                        <p><img class="outisimg" src="{{ MEDIA_URL }}{{ object.attraction }}" width="50%"  />
-                        <p>Category: {{ object.category_id}}</p>
-                        <p>Link: <a href="{{ object.link}}">{{ object.link}}</a></p>
-                        <p>Description: {{ object.description }}</p>
-                        <p>Tag: {{ object.tag }}</p>
-                        <span>
-                            <span>
-                                <button ratting="up" class="btn btn-default glyphicon glyphicon-arrow-up postVote" type="button" title="I Like This" />
-                                <span class="button-content">{{ object.up }}</span>
-                            </span>
-                            <span>
-                                <button ratting="down" class="btn btn-default glyphicon glyphicon-arrow-down postVote" type="button" title="I dislike this" />
-                                <span class="button-content">{{ object.down }}</span>
-                            </span>
-                        </span>
+                        <div class="jumbotron">
+                            <div>
+                                <span><img src="{{ MEDIA_URL }}{{ authord_logo }}" style="width:50px;height:50px;border-radius:50%;"></img></span>
+                                <span style="font-size:23px;">{{ object.authord_id }}</span>
+                            </div>
 
-                        <span>
-                            <span>
-                                <button id="collectionCollectPost" class="btn btn-default glyphicon glyphicon-heart" type="button" title="Collect"     value="{{ object.id }}"/>
-                            </span>
+                            <div>
+                                <h2 id="postTitle">{{ object.title}}</h2>
+                            </div>
+                            <input style="display:none;" id="post_pk_input" value="{{ object.id }}" />
+                            <p><img class="outisimg" src="{{ MEDIA_URL }}{{ object.attraction }}" width="100%"  />
+
+                            <article>
+                                {{ object.description }}</p>
+                            </article>
+
+
+                            <p>Category: {{ object.category_id}}</p>
+                            <p>Link: <a href="{{ object.link}}">{{ object.link}}</a></p>
+                            <p>Tag: {{ object.tag }}</p>
+
 
                             <span>
-                                <button id="collectionRemovePost" class="btn btn-default glyphicon glyphicon-remove" type="button" title="Remove"     value="{{ object.id }}"/>
+                                <span>
+                                    <button ratting="up" class="btn btn-default glyphicon glyphicon-arrow-up postVote" type="button" title="I Like This" />
+                                    <span class="button-content">{{ object.up }}</span>
+                                </span>
+                                <span>
+                                    <button ratting="down" class="btn btn-default glyphicon glyphicon-arrow-down postVote" type="button" title="I dislike this" />
+                                    <span class="button-content">{{ object.down }}</span>
+                                </span>
                             </span>
 
+                            <span>
+                                <span>
+                                    <button id="collectionCollectPost" class="btn btn-default glyphicon glyphicon-heart" type="button" title="Collect"     value="{{ object.id }}"/>
+                                </span>
 
-                        </span>
+                                <span>
+                                    <button id="collectionRemovePost" class="btn btn-default glyphicon glyphicon-remove" type="button" title="Remove"     value="{{ object.id }}"/>
+                                </span>
 
+
+                            </span>
+                        </div>
 
 					</form>
 				</div>

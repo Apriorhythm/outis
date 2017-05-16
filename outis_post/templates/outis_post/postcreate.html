@@ -1,6 +1,12 @@
 {% extends 'outis_base/base.html' %}
 {% block outis_title %}Details{% endblock %}
 
+{% block outis_staticfiles %}
+{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{% static '/css/postcreate.css' %}" />
+    <script src="{% static '/js/postcreate.js' %}"></script>
+{% endblock %}
+
 {% block outis_body %}
 
 
@@ -12,7 +18,39 @@
 
                     <form role="form" class="form-horizontal" action="{% url 'post:post-add' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form.as_p }}
+
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">@</span>
+                            {{ form.category_id }}
+                        </div>
+
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">@</span>
+                            {{ form.title }}
+                        </div>
+
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">@</span>
+                            {{ form.link }}
+                        </div>
+
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">@</span>
+                            {{ form.description }}
+                        </div>
+
+
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">@</span>
+                            {{ form.tag }}
+                        </div>
+
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">Attraction:</span>
+                            {{ form.attraction }}
+                        </div>
+
+
                         <button type="submit" class="btn btn-default">Submit</button>
 
                     </form>

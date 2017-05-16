@@ -104,6 +104,7 @@ class PostDetail(DetailView):
     # 新增 form 到 context
     def get_context_data(self, **kwargs):
         kwargs['form'] = OutisCommentForm()
+        kwargs['authord_logo'] = self.object.authord_id.logo
         return super(PostDetail, self).get_context_data(**kwargs)
 
 
@@ -114,6 +115,7 @@ class PostCreate(View):
     # display a blank form
     def get(self, request):
         form = self.form_class(None)
+        print(form)
         return render(request, self.template_name, {'form':form})
 
     # process form data

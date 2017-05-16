@@ -5,6 +5,8 @@ from django import forms
 from .models import OutisComment
 
 class OutisCommentForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea)
+
     class Meta:
         """指定一些 Meta 选项以改变 form 被渲染后的样式"""
         model = OutisComment # form 关联的 Model
