@@ -56,7 +56,7 @@ class FooView(PaginationMixin, APIView):
 
 class IndexView(PaginationMixin, APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'outis_post/index.html'
+    template_name = 'outis_post/base.html'
     paginate_by = 20
 
     def get(self, request):
@@ -65,7 +65,7 @@ class IndexView(PaginationMixin, APIView):
 
 class MusicView(PaginationMixin, APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'outis_post/index.html'
+    template_name = 'outis_post/base.html'
     paginate_by = 20
 
     def get(self, request):
@@ -75,7 +75,7 @@ class MusicView(PaginationMixin, APIView):
 
 class VideoView(PaginationMixin, APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'outis_post/index.html'
+    template_name = 'outis_post/base.html'
     paginate_by = 20
 
     def get(self, request):
@@ -85,7 +85,7 @@ class VideoView(PaginationMixin, APIView):
 
 class MiscView(PaginationMixin, APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'outis_post/index.html'
+    template_name = 'outis_post/base.html'
     paginate_by = 20
 
     def get(self, request):
@@ -134,7 +134,7 @@ class PostCreate(View):
             new_post.authord_id = request.user
             new_post.save()
 
-            return redirect('/post/index')
+            return redirect('/post/base')
         else:
             return render(request, self.template_name, {'form':form})
 
@@ -157,7 +157,7 @@ class TitleSearch(SearchView):
         keywords = request.GET['q']
         sform = SearchForm(request.GET)
         queryset = sform.search()
-        template_name = 'outis_post/index.html'
+        template_name = 'outis_post/base.html'
 
         return render_to_response(template_name, {'all_post':queryset})
 

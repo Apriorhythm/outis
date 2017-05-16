@@ -7,8 +7,8 @@ urlpatterns = [
     url(r'^foo$', views.FooView.as_view(), name='foo'),
 
     # /post/index
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^index$', views.IndexView.as_view(), name='index'),
+    url(r'^$', views.IndexView.as_view(), name='base'),
+    url(r'^index$', views.IndexView.as_view(), name='base'),
     url(r'^music$', views.MusicView.as_view(), name='music'),
     url(r'^video$', views.VideoView.as_view(), name='video'),
     url(r'^misc$', views.MiscView.as_view(), name='misc'),

@@ -35,7 +35,7 @@
             <ul class="nav navbar-nav">
 
                 <li>
-                    <a  href="{% url 'post:index' %}">
+                    <a  href="{% url 'post:base' %}">
                         <span class="glyphicon glyphicon-home"></span>&nbsp;Home
                     </a>
                 </li>
@@ -73,6 +73,11 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+
+               <li>
+                   <a href="{% url 'post:post-add' %}" class="glyphicon glyphicon-plus"></a>
+                </li>
+
             {% if user.is_authenticated %}
                 <li><a  href="{% url 'user:profile' %}">{{ user.username }}</a></li>
                 <li><a  href="{% url 'user:logout' %}">LOGOUT</a></li>
