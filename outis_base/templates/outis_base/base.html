@@ -4,18 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{% block outis_title %}Outis Space{% endblock %}</title>
 
-	{% load staticfiles %}
-	<script type="text/javascript" src="{% static '/js/jquery-3.2.0.min.js' %}"></script>
-	<script type="text/javascript" src="{% static '/bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
-
-	<link type="text/css" rel="stylesheet" href="{% static '/bootstrap-3.3.7-dist/css/bootstrap.css' %}">
-	<link type="text/css" rel="stylesheet" href="{% static '/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-
-	<link type="text/css" rel="stylesheet" href="{% static '/css/base.css' %}">
-
-	{% block outis_staticfiles %}
-	{% endblock %}
-
 </head>
 
 <body>
@@ -74,8 +62,8 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-               <li>
-                   <a href="{% url 'post:post-add' %}" class="glyphicon glyphicon-plus"></a>
+                <li id="addPostLi">
+                   <a href="{% url 'post:post-add' %}" class="glyphicon glyphicon-plus" data-toggle="tooltip" data-placement="bottom" title="Add a post"></a>
                 </li>
 
             {% if user.is_authenticated %}
@@ -98,6 +86,21 @@
         <p>Outis</p>
     {% endblock %}
 </div>
+
+
+
+	{% load staticfiles %}
+	<script type="text/javascript" src="{% static '/js/jquery-3.2.0.min.js' %}"></script>
+	<script type="text/javascript" src="{% static '/bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
+
+	<link type="text/css" rel="stylesheet" href="{% static '/bootstrap-3.3.7-dist/css/bootstrap.css' %}">
+	<link type="text/css" rel="stylesheet" href="{% static '/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+
+	<script type="text/javascript" src="{% static '/js/base.js' %}"></script>
+	<link type="text/css" rel="stylesheet" href="{% static '/css/base.css' %}">
+
+	{% block outis_staticfiles %}
+	{% endblock %}
 
 </body>
 </html>

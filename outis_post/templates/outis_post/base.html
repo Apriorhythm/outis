@@ -9,40 +9,42 @@ POST
 
 {% block outis_staticfiles %}
 {% load staticfiles %}
-    <script src="{% static '/js/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
-    <script src="{% static '/js/masonry/masonry.pkgd.min.js' %}"></script>
 
-	<link type="text/css" rel="stylesheet" href="{% static '/css/index.css' %}" />
-    <script src="{% static '/js/index.js' %}"></script>
+	<link type="text/css" rel="stylesheet" href="{% static '/css/base.css' %}" />
+    <script src="{% static '/js/base.js' %}"></script>
 {% endblock %}
 
 {% block outis_body %}
-
-<div id="postContainer" class="grid container-fluid">
-{% for post in all_post %}
-    <div class="grid-item" >
-        <div class="imgShell">
-            <a href="{% url 'post:detail' post.id %}">
-                <img class="outisimg" src="{{ MEDIA_URL }}{{ post.attraction }}" width="33%" />
-            </a>
-        </div>
-
-        <div class="stuff">
-            <span>
+<div class="col-md-9">
+    <div id="postContainer" class="container col-md-12">
+    {% for post in all_post %}
+        <div class="row post-item panel panel-default" style="background:#FFFFFF; padding:10px;">
+            <div class="imgShell col-md-4">
                 <a href="{% url 'post:detail' post.id %}">
-                    {{ post.title }}
+                    <img class="outisimg" src="{{ MEDIA_URL }}{{ post.attraction }}" width="100%" />
                 </a>
-            </span>
+            </div>
 
-            <div>{{ post.description }}</div>
-            <div><a href="{{ post.link}}">{{ post.link}}</a></div>
+            <div class="stuff col-md-8">
+                <span>
+                    <a href="{% url 'post:detail' post.id %}">
+                        {{ post.title }}
+                    </a>
+                </span>
+
+                <div>{{ post.description }}</div>
+                <div><a href="{{ post.link}}">{{ post.link}}</a></div>
+            </div>
+
         </div>
-
+    {% endfor %}
     </div>
-{% endfor %}
+
 </div>
 
-
+<div id="XXXContainer" class="panel panel-default col-md-3">
+asdfasdfa
+</div>
 
 {% endblock %}
 
