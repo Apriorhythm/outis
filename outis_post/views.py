@@ -61,7 +61,9 @@ class IndexView(PaginationMixin, APIView):
 
     def get(self, request):
         queryset = OutisPost.objects.all()
-        return Response({'all_post':queryset})
+        return Response({
+            'all_post':queryset,
+        })
 
 class MusicView(PaginationMixin, APIView):
     renderer_classes = [TemplateHTMLRenderer]

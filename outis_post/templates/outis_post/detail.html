@@ -19,8 +19,10 @@
                         {% csrf_token %}
                         <div class="jumbotron">
                             <div>
-                                <span><img src="{{ MEDIA_URL }}{{ authord_logo }}" style="width:50px;height:50px;border-radius:50%;"></img></span>
-                                <span style="font-size:23px;">{{ object.authord_id }}</span>
+                                <a href="/user/peek/{{ object.authord_id_id }}">
+                                    <span><img src="{{ MEDIA_URL }}{{ authord_logo }}" style="width:50px;height:50px;border-radius:50%;"></img></span>
+                                    <span style="font-size:23px;">{{ object.authord_id }}</span>
+                                </a>
                             </div>
 
                             <div>

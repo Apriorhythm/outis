@@ -9,31 +9,81 @@ POST
 
 {% block outis_staticfiles %}
 {% load staticfiles %}
-
-	<link type="text/css" rel="stylesheet" href="{% static '/css/base.css' %}" />
-    <script src="{% static '/js/base.js' %}"></script>
+	<link type="text/css" rel="stylesheet" href="{% static '/post/css/base.css' %}" />
+    <script src="{% static '/post/js/base.js' %}"></script>
 {% endblock %}
 
 {% block outis_body %}
+
 <div class="col-md-9">
     <div id="postContainer" class="container col-md-12">
     {% for post in all_post %}
-        <div class="row post-item panel panel-default" style="background:#FFFFFF; padding:10px;">
-            <div class="imgShell col-md-4">
-                <a href="{% url 'post:detail' post.id %}">
-                    <img class="outisimg" src="{{ MEDIA_URL }}{{ post.attraction }}" width="100%" />
-                </a>
+        <div class="row col-md-12 post-item panel panel-default" >
+            <div class="imgShell col-md-4" >
+                <div class="container col-md-2" style="text-align:center;">
+					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <a class="post-vote btn" data-toggle="tooltip" data-placement="top"
+                                ratting="up" post_pk="{{ post.id }}"  title="{{ post.up }}">
+                                <i class="fa fa-caret-up fa-3x" aria-hidden="true"></i>
+                            </a>
+                        </div>
+
+                        <div class="row">
+                            <label id="vote-count">{{ post.up|add:post.down }}</label>
+                        </div>
+
+                        <div class="row">
+                            <a class="post-vote btn" data-toggle="tooltip" data-placement="bottom"
+                                ratting="down" post_pk="{{ post.id }}" title="{{ post.down }}">
+                                <i class="fa fa-caret-down fa-3x" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-10" style="margin-top:17px;">
+                    <a href="{% url 'post:detail' post.id %}">
+                        <img class="outisimg" src="{{ MEDIA_URL }}{{ post.attraction }}" width="100%" />
+                    </a>
+                </div>
             </div>
 
-            <div class="stuff col-md-8">
-                <span>
-                    <a href="{% url 'post:detail' post.id %}">
-                        {{ post.title }}
-                    </a>
-                </span>
+            <div class="stuff col-md-7 container">
+                <div id="content-title-and-content" class="col-md-8">
+                    <div id="content-title" class="row col-md-12">
+                        <a href="{% url 'post:detail' post.id %}" style="font-size:18px;">
+                            {{ post.title }}
+                        </a>
+                    </div>
 
-                <div>{{ post.description }}</div>
-                <div><a href="{{ post.link}}">{{ post.link}}</a></div>
+                    <div id="content-content" class="row col-md-12">
+                         <div style="text-overflow:ellipsis;">{{ post.description|safe|truncatechars:66 }}</div>
+                    </div>
+
+                </div>
+
+
+                <div id="content-author-and-operations" class="container col-md-4">
+                    <div id="content-author-info" class="row col-md-12">
+                        <a href="/user/peek/{{ post.authord_id_id}}">
+                            <span class="col-md-5"><img src="{{ MEDIA_URL }}{{ post.authord_id.logo }}" style="width:25px;height:25px;border-radius:50%;"></img></span>
+                            <span class="col-md-7" style="font-size:15px;">{{ post.authord_id }}</span>
+                        </a>
+                    </div>
+
+                    <div id="content-operations" class="row col-md-12">
+                        <a href="{{ post.link}}">
+                            <i class="fa fa-arrow-circle-o-right fa-5x" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="row col-md-12">
+                    <label style="float:right;">{{ post.post_date }}</label>
+                </div>
             </div>
 
         </div>
@@ -42,8 +92,10 @@ POST
 
 </div>
 
-<div id="XXXContainer" class="panel panel-default col-md-3">
+<div id="XXXContainer" class="chat-room panel panel-default col-md-3">
+    <div id="chat-room-text">
 asdfasdfa
+    </div>
 </div>
 
 {% endblock %}
