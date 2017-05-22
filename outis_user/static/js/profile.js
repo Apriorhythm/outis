@@ -2,6 +2,59 @@ function allMyPostClick() {
     $.get('/post/allMyPost',function(data){
         $("#personalContent").html("");
         $.each(data, function(index, post) {
+            var post_date = post.post_date.split('T')[0] + " "
+            var post_time = post.post_date.split('T')[1].split('.')[0];
+
+
+newHTML = "" +
+        "<div class='row col-md-12 post-item panel panel-default'>" +
+            "<div class='imgShell col-md-4'>" +
+                "<div class='col-md-10' style='margin-top:17px;'>" +
+                    "<a href='/post/detail/" + post.id + "'>" +
+                        "<img class='outisimg' src='" + post.attraction + "' width='100%' />" +
+                    "</a>" +
+                "</div>" +
+            "</div>" +
+
+            "<div class='stuff col-md-7 container'>" +
+                "<div id='content-title-and-content' class='col-md-8'>" +
+                    "<div id='content-title' class='row col-md-12'>" +
+                        "<a href='/post/detail/" + post.id + "' style='font-size:18px;'>" +
+                             "" + post.title + "" +
+                        "</a>" +
+                    "</div>" +
+
+                    "<div id='content-content' class='row col-md-12'>" +
+                         "<div style='text-overflow:ellipsis;'>" + post.description + "</div>" +
+                    "</div>" +
+                "</div>" +
+
+
+                "<div id='content-author-and-operations' class='container col-md-4'>" +
+                    "<div id='content-author-info' class='row col-md-12'>" +
+                        "<a href='/user/peek/" +  post.authord_id + "'>" +
+                            "<span class='col-md-5'><img src='" + post.authord_logo + "' style='width:25px;height:25px;border-radius:50%;'></img></span>" +
+                            "<span class='col-md-7' style='font-size:15px;'>" + post.authord + "</span>" +
+                        "</a>" +
+                    "</div>" +
+
+                    "<div id='content-operations' class='row col-md-12'>" +
+                        "<a href='" + post.link +"'>" +
+                            "<i class='fa fa-arrow-circle-o-right fa-5x' aria-hidden='true'></i>" +
+                        "</a>" +
+                    "</div>" +
+                "</div>" +
+
+                "<div class='row col-md-12'>" +
+                    "<label style='float:right;'>" + post_date + " / " + post_time + "</label>" +
+                "</div>" +
+            "</div>" +
+        "</div>";
+
+
+
+/*
+
             newHTML = "" +
                 "<div class='postBlock'> " +
                     "<div class='imgShell'> " +
@@ -25,6 +78,7 @@ function allMyPostClick() {
                     "</div>" +
                 "</div>";
 
+*/
 
             $("#personalContent").append(newHTML);
 
@@ -32,6 +86,7 @@ function allMyPostClick() {
             });
 
         });
+
 
         // bind delete button function
         $('body').on('click', '.deleteMyPost', function(){
@@ -62,29 +117,58 @@ function postCollectionClick() {
     $.get('/collection/post/personalPostCollection',function(data){
         $("#personalContent").html("");
         $.each(data, function(index, post) {
-            newHTML = "" +
-                "<div class='postBlock'> " +
-                    "<div class='imgShell'> " +
-                        "<a href='/post/detail/" + post.id + "'>" +
-                            "<img class='outisimg' src='" + post.attraction + "' width='33%' />" +
+            var post_date = post.post_date.split('T')[0] + " "
+            var post_time = post.post_date.split('T')[1].split('.')[0];
+
+
+
+newHTML = "" +
+        "<div class='row col-md-12 post-item panel panel-default'>" +
+            "<div class='imgShell col-md-4'>" +
+                "<div class='col-md-10' style='margin-top:17px;'>" +
+                    "<a href='/post/detail/" + post.id + "'>" +
+                        "<img class='outisimg' src='" + post.attraction + "' width='100%' />" +
+                    "</a>" +
+                "</div>" +
+            "</div>" +
+
+            "<div class='stuff col-md-7 container'>" +
+                "<div id='content-title-and-content' class='col-md-8'>" +
+                    "<div id='content-title' class='row col-md-12'>" +
+                        "<a href='/post/detail/" + post.id + "' style='font-size:18px;'>" +
+                             "" + post.title + "" +
                         "</a>" +
                     "</div>" +
 
-                    "<div class='stuff'>" +
-                        "<h3>" +
-                            "<a href='/post/detail/" + post.id + "'>" +
-                                 post.title +
-                            "</a>" +
-                        "</h3>" +
-
-                        "<div>" +  post.description + "</div>" +
-                        "<div><a href='" +  post.link + "'>" + post.link + "</a></div>" +
-                        "<span>" +
-                            "<button class='btn btn-default glyphicon glyphicon-remove deleteCollectedPost' type='button' title='Remove' value='" + post.id + "'/>" +
-                        "</span>" +
-
+                    "<div id='content-content' class='row col-md-12'>" +
+                         "<div style='text-overflow:ellipsis;'>" + post.description + "</div>" +
                     "</div>" +
-                "</div>";
+                "</div>" +
+
+
+                "<div id='content-author-and-operations' class='container col-md-4'>" +
+                    "<div id='content-author-info' class='row col-md-12'>" +
+                        "<a href='/user/peek/" +  post.authord_id + "'>" +
+                            "<span class='col-md-5'><img src='" + post.authord_logo + "' style='width:25px;height:25px;border-radius:50%;'></img></span>" +
+                            "<span class='col-md-7' style='font-size:15px;'>" + post.authord + "</span>" +
+                        "</a>" +
+                    "</div>" +
+
+                    "<div id='content-operations' class='row col-md-12'>" +
+                        "<a href='" + post.link +"'>" +
+                            "<i class='fa fa-arrow-circle-o-right fa-5x' aria-hidden='true'></i>" +
+                        "</a>" +
+                    "</div>" +
+                "</div>" +
+
+                "<div class='row col-md-12'>" +
+                    "<label style='float:right;'>" + post_date + " / " + post_time + "</label>" +
+                "</div>" +
+            "</div>" +
+        "</div>";
+
+
+
 
 
             $("#personalContent").append(newHTML);
@@ -126,12 +210,12 @@ function peopleCollectionClick() {
         $("#personalContent").html("");
         $.each(data, function(index, user) {
             newHTML = "" +
-                "<div class='peopleBlock' >" +
+                "<div class='peopleBlock' style='height:200px; width:200px; text-align:center;'>" +
                     "<div class='imgShell' >" +
-                        "<img alt='logo' src='" + user.logo + "' style='width:100px;height:100px;border-radius:50%;'>" +
-                    "</div>" +
-                    "<div class='usernameShell'>" +
-                        "<span>" + user.username + "</span>" +
+                        "<a href='/user/peek/" +  user.id + "'>" +
+                            "<img alt='logo' src='" + user.logo + "' class='img-circle'/>" +
+                            "<div>" + user.username + "</div>" +
+                        "</a>" +
                     "</div>" +
                     "<span>" +
                         "<button class='btn btn-default glyphicon glyphicon-remove deleteCollectedUser' type='button' title='Remove' value='" + user.id + "'/>" +

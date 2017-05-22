@@ -42,15 +42,25 @@ from outis_comment.serializers import OutisCommentSerializer
 
 from outis_comment.forms import OutisCommentForm
 
-class FooView(PaginationMixin, APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'outis_post/foo.html'
-    paginate_by = 20
-
+class FooView(PaginationMixin, ListAPIView):
     def get(self, request):
         queryset = OutisPost.objects.all()
-        return Response({'all_post':queryset})
+        serializer = OutisPostSerializer(queryset, many=True)
+        ordering_fields = ('up_minus_down')
 
+        return Response({
+            'all_posts':serializer.data
+        })
+
+
+
+class GetPosts(PaginationMixin, APIView):
+    def get(self, request):
+        queryset = OutisPost.objects.all()
+        serializer = OutisPostSerializer(queryset, many=True)
+        return Response({
+            'all_posts':serializer.data
+        })
 
 
 
@@ -61,6 +71,8 @@ class IndexView(PaginationMixin, APIView):
 
     def get(self, request):
         queryset = OutisPost.objects.all()
+        ordering_fields = ('up_minus_down')
+
         return Response({
             'all_post':queryset,
         })

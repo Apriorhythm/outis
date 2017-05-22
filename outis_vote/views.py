@@ -6,6 +6,8 @@ from django.shortcuts import render
 
 from django.contrib.auth.decorators import login_required
 
+from django.db.models import F
+
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -20,6 +22,8 @@ class VotePost(APIView):
     def post(self, request, post_pk):
         up_or_down = request.POST.get('ratting')
         ratting = False
+        post = OutisPost.objects.get(pk=post_pk)
+
         if up_or_down == 'up':
             ratting = True
 
@@ -30,9 +34,20 @@ class VotePost(APIView):
             )
             if existing_vote.ratting == ratting:
                 existing_vote.delete()
+                if ratting == True:
+                    post.up = F('up') - 1
+                else:
+                    post.down = F('down') - 1
+
             else:
                 existing_vote.ratting = not existing_vote.ratting
                 existing_vote.save()
+                # no mater what inside vote
+                # the final result is
+                # post.up -1
+                # post.down + 1
+                post.up = F('up') - 1
+                post.down = F('up') + 1
         except OutisPostVote.DoesNotExist:
             new_vote = OutisPostVote(
                 post_id = OutisPost.objects.get(pk=post_pk),
@@ -40,6 +55,12 @@ class VotePost(APIView):
                 ratting = ratting,
             )
             new_vote.save()
+            if ratting == True:
+                post.up = F('up') + 1
+            else:
+                post.down = F('down') + 1
+
+        post.save()
 
         isOK = 'OK'
         thePost = OutisPost.objects.get(pk=post_pk)
